@@ -14,7 +14,34 @@ program
   .action( (filePath1, filePath2) => {  
     let ob1 = readFileSync(resolve(filePath1));
     let ob2 = readFileSync(resolve(filePath2)); 
-    
+    let ress = [];
+    console.log(typeof(ob1));
+    Object.entries(ob1).forEach(([key, value]) => {
+      console.log(key, value);
+    });
+    for (let [key, value] of Object.entries(ob1)) {
+      if (key in ob2) {
+        if (value === ob2[key]) {
+          ress.push([' ', key, value]);
+        } else {
+          ress.push(['-', key, value]); 
+          ress.push(['+', key, ob2[key]]);
+        };
+      } else ress.push(['-', key, value]); 
+    };
+    for (let [key, value] of Object.entries(ob2)) {
+      if (!(key in ob1)) {
+        ress.push(['+', key, value]);
+      };
+    };
+    let srt = _.sortBy(ress, (el) => el[1] );
+    let result = [];
+
+    srt.forEach(element => {
+      result.push(`${element[0]} ${element[1]}: ${element[2]}`);
+    });
+    const out = ['{', ...result, '}'].join('\n');
+    console.log(out);
 
   });
 
