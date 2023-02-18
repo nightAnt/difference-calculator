@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/nightAnt/difference-calculator#readme",
   "dependencies": {
-    "commander": "^10.0.0"
+    "commander": "^10.0.0",
+    "node-fs": "^0.1.7"
   }
 }
