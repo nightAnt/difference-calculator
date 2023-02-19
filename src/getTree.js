@@ -1,18 +1,38 @@
 import _ from 'lodash';
 
-function getTree(obj1, obj2) {
-    let keys = _.union(Object.keys(obj1), Object.keys(obj2));
+function isObject(key, obj) {
+    return (typeof(obj[key]) === 'object') ? true : false;
+}
+
+export function getTree(obj1, obj2) {
+    let keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
   
     const result = keys.map(key => {
-      
-      if (typeof(obj1[key]) === 'object' && typeof(obj2[key]) === 'object' ) {
+  
+      if (isObject(key, obj1) && isObject(key, obj2)) {
         return {
           key,
           value: getTree(obj1[key], obj2[key]),
           status: 'nested'
         };
       };
-      
+
+      if (isObject(key, obj1) && !isObject(key, obj2) ) {
+        return {
+            key,
+            value: getTree(obj1[key], {}),
+            status: 'nested'
+          };
+      };
+
+      if (!isObject(key, obj1) && isObject(key, obj2)) {
+        return {
+            key,
+            value: getTree({}, obj2[key]),
+            status: 'nested'
+          };
+      };
+
       if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
           if (obj1[key] === obj2[key]) {
             return {
@@ -48,4 +68,3 @@ function getTree(obj1, obj2) {
   
     return result;
   }
-  export default getTree;
