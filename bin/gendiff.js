@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { resolve } from 'path';
+
 import { Command } from 'commander';
-import { readFileSync } from 'fs';
+
 import _ from 'lodash';
 import { getTree } from '../src/getTree.js';
 import { genDiff } from '../src/getDiff.js';
@@ -14,11 +14,9 @@ program
   .option('-f, --format <type>', 'output format')
   .arguments('<filepath1> <filepath2>')
   .action((filePath1, filePath2) => {
-    const obj1 = JSON.parse(readFileSync(resolve(filePath1)));
-    const obj2 = JSON.parse(readFileSync(resolve(filePath2)));
-    const tree = getTree(obj1, obj2);
-
-    console.log(genDiff(tree));
+    
+    console.log(genDiff(filePath1, filePath2));
   });
 
+  
 program.parse();
