@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import { getParsedObjects } from '/home/nightAnt/difference-calculator/src/parseFiles.js';
-import { getTree } from '/home/nightAnt/difference-calculator/src/getTree.js';
+import { getParsedObjects } from './parseFiles.js';
+import { getTree } from './getTree.js';
 
-export function genDiff(filePath1, filePath2) {
+export function getDiff(filePath1, filePath2) {
   const [obj1, obj2] = getParsedObjects(filePath1, filePath2);
   const data = getTree(obj1, obj2);
   const [replacer, spacesCount] = [' ', 2];

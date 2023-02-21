@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-
 import _ from 'lodash';
-import { getTree } from '../src/getTree.js';
-import { genDiff } from '../src/getDiff.js';
+import { getDiff } from '../src/getDiff.js';
 
 const program = new Command();
 
@@ -14,8 +12,7 @@ program
   .option('-f, --format <type>', 'output format')
   .arguments('<filepath1> <filepath2>')
   .action((filePath1, filePath2) => {
-    
-    console.log(genDiff(filePath1, filePath2));
+    console.log(getDiff(filePath1, filePath2));
   });
 
   
