@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import _ from 'lodash';
-import { getDiff } from '../src/getDiff.js';
+import getDiff from '../src/getDiff.js';
 
 const program = new Command();
 
@@ -15,5 +14,4 @@ program
     console.log(getDiff(filePath1, filePath2));
   });
 
-  
 program.parse();

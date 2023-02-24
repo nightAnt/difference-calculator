@@ -4,7 +4,7 @@ function isObject(key, obj) {
   return (typeof (obj[key]) === 'object');
 }
 
-export function getTree(obj1, obj2) {
+function getTree(obj1, obj2) {
   const keys = _.union(Object.keys(obj1), Object.keys(obj2)).sort();
 
   const result = keys.map((key) => {
@@ -64,3 +64,5 @@ export function getTree(obj1, obj2) {
 
   return result;
 }
+
+export default getTree;

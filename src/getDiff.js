@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import { getParsedObjects } from './parseFiles.js';
-import { getTree } from './getTree.js';
+import getParsedObjects from './parseFiles.js';
+import getTree from './getTree.js';
 
-export function getDiff(filePath1, filePath2) {
+function getDiff(filePath1, filePath2) {
   const [obj1, obj2] = getParsedObjects(filePath1, filePath2);
   const data = getTree(obj1, obj2);
   const [replacer, spacesCount] = [' ', 2];
@@ -17,7 +17,7 @@ export function getDiff(filePath1, filePath2) {
     const result = values.map((value) => {
       const startIndent = replacer.repeat(depth * spacesCount);
       if (value.status === 'changed') {
-        return `${startIndent}- ${value.key}: ${iter(value.valueBefore, depth + 2)}\n${startIndent}+ ${value.key}: ${iter(value.valueAfter, depth + 1)}`;
+        return `${startIndent}- ${value.key}: ${iter(value.valueBefore, depth + 2)}\n${startIndent}+ ${value.key}: ${iter(value.valueAfter, depth + 2)}`;
       } if (value.status === 'added') {
         return `${startIndent}+ ${value.key}: ${iter(value.value, depth + 2)}`;
       } if (value.status === 'deleted') {
@@ -33,3 +33,5 @@ export function getDiff(filePath1, filePath2) {
 
   return iter(data, 1);
 }
+
+export default getDiff;
