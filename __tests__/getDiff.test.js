@@ -11,7 +11,11 @@ const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filen
 
 const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf8');
 
-test('test1', () => {
+test('read JSON file', () => {
   const expected = readFile('result-json.txt').trim();
   expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'))).toBe(expected);
+});
+test('read YML file', () => {
+  const expected = readFile('result-json.txt').trim();
+  expect(genDiff(getFixturePath('filepath1.yml'), getFixturePath('filepath2.yaml'))).toBe(expected);
 });
