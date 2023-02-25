@@ -23,7 +23,8 @@
   "dependencies": {
     "commander": "^10.0.0",
     "lodash": "^4.17.21",
-    "node-fs": "^0.1.7"
+    "node-fs": "^0.1.7",
+    "js-yaml": "^4.1.0"
   },
   "devDependencies": {
     "eslint": "^8.34.0",
